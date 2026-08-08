@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>probe — repo &amp; model inspector</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+<link rel="stylesheet" href="/static/style.css?v=7" />
+</head>
+<body>
+
+<div class="scanlines"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">▚</span>
+    <span class="brand-name">probe</span>
+    <span class="brand-sub">/ repo &amp; model inspector</span>
+  </div>
+  <div class="topbar-status" id="ollamaStatus">
+    <span class="dot" id="ollamaDot"></span>
+    <span id="ollamaStatusText">checking local llm…</span>
+  </div>
+</header>
+
+<main class="stage">
+
+  <section class="intake">
+    <p class="eyebrow">01 — paste a source</p>
+    <h1>What are we looking at?</h1>
+    <p class="lede">Drop a Hugging Face model link or a GitHub repo URL. Nothing gets installed or executed — we read the metadata and let the local model imagine the rest.</p>
+
+    <form id="analyzeForm" class="intake-form">
+      <div class="input-shell">
+        <span class="input-caret">&gt;</span>
+        <input
+          type="text"
+          id="urlInput"
+          placeholder="https://huggingface.co/distilbert-base-uncased  or  https://github.com/ultralytics/yolov5"
+          autocomplete="off"
+          spellcheck="false"
+        />
+      </div>
+      <button type="submit" id="analyzeBtn" class="btn-primary">
+        <span>inspect</span>
+      </button>
+    </form>
+
+    <div id="modeChoice" class="mode-choice hidden">
+      <p class="mode-label">This repo isn't obviously a model. What is it?</p>
+      <div class="mode-options">
+        <button type="button" class="mode-opt" data-mode="output_only">
+          <span class="mode-opt-title">Output-only</span>
+          <span class="mode-opt-desc">Dashboard, tool, or library — show what it produces</span>
+        </button>
+        <button type="button" class="mode-opt" data-mode="model">
+          <span class="mode-opt-title">Model</span>
+          <span class="mode-opt-desc">It runs inference — show model info + mock prediction</span>
+        </button>
+      </div>
+    </div>
+
+    <div id="errorBox" class="error-box hidden"></div>
+  </section>
+
+  <section id="resultsSection" class="results hidden">
+
+    <div class="results-header">
+      <p class="eyebrow" id="resultsEyebrow">02 — extracted info</p>
+      <span class="mode-tag" id="modeTag">model</span>
+    </div>
+
+    <div class="info-grid" id="infoGrid"></div>
+
+    <div class="mock-panel">
+      <div class="mock-panel-header">
+        <p class="eyebrow">03 — simulated output</p>
+        <div class="mock-panel-actions">
+          <div id="speedToggle" class="speed-toggle hidden">
+            <span class="speed-badge">parsed from source</span>
+          </div>
+          <button type="button" id="generateMockBtn" class="btn-secondary">
+            <span>generate mock</span>
+          </button>
+        </div>
+      </div>
+      <div id="mockOutput" class="mock-output hidden"></div>
+      <div id="mockLoading" class="mock-loading hidden">
+        <span class="pulse"></span> <span id="mockLoadingText">asking local llama3.2:3b to imagine the output…</span>
+      </div>
+    </div>
+
+    <div class="sysinfo-panel">
+      <div class="mock-panel-header">
+        <p class="eyebrow">04 — this machine</p>
+        <button type="button" id="runSysAnalysisBtn" class="btn-secondary">
+          <span>run system analysis</span>
+        </button>
+      </div>
+      <p class="next-step-text">Check your machine's specs — CPU, RAM, GPU, and more — any time. No LLM involved, just a direct hardware read.</p>
+      <div id="sysInfoGrid" class="info-grid hidden"></div>
+      <div id="sysInfoLoading" class="mock-loading hidden">
+        <span class="pulse"></span> <span>reading CPU / RAM / GPU…</span>
+      </div>
+    </div>
+
+  </section>
+
+</main>
+
+<script src="/static/app.js?v=7"></script>
+</body>
+</html>
