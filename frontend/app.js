@@ -16,6 +16,13 @@ const ollamaStatusText = document.getElementById("ollamaStatusText");
 const runSysAnalysisBtn = document.getElementById("runSysAnalysisBtn");
 const sysInfoGrid = document.getElementById("sysInfoGrid");
 const sysInfoLoading = document.getElementById("sysInfoLoading");
+const latencyPanel = document.getElementById("latencyPanel");
+const calcLatencyBtn = document.getElementById("calcLatencyBtn");
+const latencyLoading = document.getElementById("latencyLoading");
+const latencyResult = document.getElementById("latencyResult");
+const latencyUnsupported = document.getElementById("latencyUnsupported");
+
+let systemSpecsReady = false;
 
 let currentInfo = null;
 let pendingUrl = null;
@@ -166,6 +173,14 @@ function renderResults(info) {
   mockOutput.className = "mock-output hidden";
   mockOutput.innerHTML = "";
 
+  // New repo/model analyzed -> any previous latency prediction is stale
+  latencyResult.classList.add("hidden");
+  latencyResult.innerHTML = "";
+  latencyUnsupported.classList.add("hidden");
+  if (systemSpecsReady) {
+    latencyPanel.classList.remove("hidden");
+  }
+
   const fs = info.frontend_source || {};
   const speedToggle = document.getElementById("speedToggle");
   if (mode === "output_only" && fs.has_frontend_components) {
@@ -179,12 +194,13 @@ function renderResults(info) {
   resultsSection.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
-function addCell(label, value, mono = false, wide = false, targetGrid = infoGrid) {
+function addCell(label, value, mono = false, wide = false, targetGrid = infoGrid, desc = null) {
   const cell = document.createElement("div");
   cell.className = "info-cell" + (wide ? " wide" : "");
   cell.innerHTML = `
     <div class="info-cell-label">${label}</div>
     <div class="info-cell-value ${mono ? "mono" : ""}">${escapeHtml(fmt(value))}</div>
+    ${desc ? `<div class="info-cell-desc">${escapeHtml(desc)}</div>` : ""}
   `;
   targetGrid.appendChild(cell);
 }
@@ -281,6 +297,13 @@ runSysAnalysisBtn.addEventListener("click", async () => {
     if (!res.ok) throw new Error("Could not read system specs.");
     const specs = await res.json();
     renderSysInfo(specs);
+    // Specs read successfully -> offer the "calculate latency" step. Only
+    // shown once we actually have both a repo/model analyzed (currentInfo)
+    // and this machine's specs, since the prediction needs both.
+    systemSpecsReady = true;
+    if (currentInfo) {
+      latencyPanel.classList.remove("hidden");
+    }
   } catch (err) {
     sysInfoGrid.innerHTML = `<div class="info-cell wide"><div class="info-cell-value">${escapeHtml(err.message)}</div></div>`;
     sysInfoGrid.classList.remove("hidden");
@@ -317,4 +340,111 @@ function renderSysInfo(specs) {
   }
 
   sysInfoGrid.classList.remove("hidden");
+}
+
+// ---------- Calculate expected latency ----------
+calcLatencyBtn.addEventListener("click", async () => {
+  if (!currentInfo) return;
+  calcLatencyBtn.disabled = true;
+  latencyResult.classList.add("hidden");
+  latencyResult.innerHTML = "";
+  latencyUnsupported.classList.add("hidden");
+  latencyLoading.classList.remove("hidden");
+
+  try {
+    const res = await fetch(`${API_BASE}/api/predict-latency`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ info: currentInfo }),
+    });
+    const data = await res.json();
+
+    if (!res.ok) {
+      latencyUnsupported.textContent = data.detail || "Could not calculate latency for this machine.";
+      latencyUnsupported.classList.remove("hidden");
+      return;
+    }
+
+    if (data.model_class === "unknown") {
+      latencyUnsupported.textContent =
+        `${data.message} (${data.reason})`;
+      latencyUnsupported.classList.remove("hidden");
+      return;
+    }
+
+    renderLatencyResult(data);
+  } catch (err) {
+    latencyUnsupported.textContent = "Could not reach the backend to calculate latency.";
+    latencyUnsupported.classList.remove("hidden");
+  } finally {
+    latencyLoading.classList.add("hidden");
+    calcLatencyBtn.disabled = false;
+  }
+});
+
+function renderLatencyResult(data) {
+  latencyResult.innerHTML = "";
+
+  addCell("Detected model type", data.model_class, false, false, latencyResult);
+  addCell("Detection confidence", data.detection?.confidence, false, false, latencyResult);
+  addCell("Hardware used", data.hardware_used?.device_name, false, false, latencyResult);
+  addCell("Hardware match note", data.hardware_used?.match_note, false, true, latencyResult);
+
+  if (data.model_class === "llm") {
+    addCell("Decode speed", `${data.tokens_per_sec} tokens/sec`, false, false, latencyResult, data.tokens_per_sec_desc);
+    addCell("Decode latency", `${data.decode_ms_per_token} ms/token`, false, false, latencyResult, data.decode_desc);
+    addCell("Prefill latency", `${data.prefill_ms_per_token} ms/token`, false, false, latencyResult, data.prefill_desc);
+    if (data.load_time_estimate_sec) {
+      addCell(
+        "Estimated model load time",
+        `~${data.load_time_estimate_sec.seconds}s (assumes ${data.load_time_estimate_sec.assumed_disk_read_mbps} MB/s disk)`,
+        false, true, latencyResult, data.load_time_estimate_sec.desc
+      );
+    }
+    if (typeof data.ram_pressure_ratio === "number") {
+      addCell(
+        "Free RAM vs model size",
+        `${data.ram_pressure_ratio}x`,
+        false, false, latencyResult,
+        "How much free memory you have relative to the model's size. Below ~1.5x, expect slowdowns from paging."
+      );
+    }
+
+    for (const key of ["short_qa", "summarization", "long_form"]) {
+      const p = data.presets?.[key];
+      if (!p) continue;
+      addCell(
+        `${p.label} (${p.input_tokens} in / ${p.output_tokens} out)`,
+        `~${p.total_latency_sec}s total (TTFT ${p.ttft_ms}ms)`,
+        false, true, latencyResult, p.desc
+      );
+    }
+  } else if (data.model_class === "vision") {
+    addCell("Per-image latency", `${data.ms_per_image} ms`, false, false, latencyResult, data.ms_per_image_desc);
+    addCell("Throughput", `${data.fps} FPS`, false, false, latencyResult, data.fps_desc);
+    if (data.load_time_estimate_sec) {
+      addCell(
+        "Estimated model load time",
+        `~${data.load_time_estimate_sec.seconds}s (assumes ${data.load_time_estimate_sec.assumed_disk_read_mbps} MB/s disk)`,
+        false, true, latencyResult, data.load_time_estimate_sec.desc
+      );
+    }
+    if (typeof data.ram_pressure_ratio === "number") {
+      addCell(
+        "Free RAM vs model size",
+        `${data.ram_pressure_ratio}x`,
+        false, false, latencyResult,
+        "How much free memory you have relative to the model's size. Below ~1.5x, expect slowdowns from paging."
+      );
+    }
+  }
+
+  if (data.attribute_notes && data.attribute_notes.length) {
+    addTagsCell("Estimated (not from model card)", data.attribute_notes, latencyResult);
+  }
+  if (data.warnings && data.warnings.length) {
+    addTagsCell("Warnings", data.warnings, latencyResult);
+  }
+
+  latencyResult.classList.remove("hidden");
 }

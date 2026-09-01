@@ -7,7 +7,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
-<link rel="stylesheet" href="/static/style.css?v=7" />
+<link rel="stylesheet" href="/static/style.css?v=8" />
 </head>
 <body>
 
@@ -106,10 +106,25 @@
       </div>
     </div>
 
+    <div id="latencyPanel" class="sysinfo-panel hidden">
+      <div class="mock-panel-header">
+        <p class="eyebrow">05 — expected latency</p>
+        <button type="button" id="calcLatencyBtn" class="btn-secondary">
+          <span>calculate expected latency</span>
+        </button>
+      </div>
+      <p class="next-step-text">Estimate how fast this model would actually run on this machine, using a trained latency model (LLM and vision models supported so far).</p>
+      <div id="latencyLoading" class="mock-loading hidden">
+        <span class="pulse"></span> <span>predicting latency…</span>
+      </div>
+      <div id="latencyResult" class="info-grid hidden"></div>
+      <div id="latencyUnsupported" class="next-step-text hidden"></div>
+    </div>
+
   </section>
 
 </main>
 
-<script src="/static/app.js?v=7"></script>
+<script src="/static/app.js?v=8"></script>
 </body>
 </html>

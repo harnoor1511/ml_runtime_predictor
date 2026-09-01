@@ -12,6 +12,10 @@ from analyzer.jsx_mockup import build_fast_mockup_html
 from llm.ollama_client import call_ollama, DEFAULT_MODEL
 from llm.prompts import build_model_mock_prompt, build_output_only_prompt
 from system_specs import collect_system_specs
+from ml.model_type import detect_model_class
+from ml.hardware_lookup import resolve_hardware
+from ml.attribute_extractor import extract_llm_attributes, extract_vision_attributes
+from ml.predict import predict_llm, predict_vision
 
 app = FastAPI(title="ML Runtime Predictor & Repo Visualizer")
 
@@ -44,6 +48,70 @@ class MockRequest(BaseModel):
     mode: str  # "model" | "output_only"
     ollama_model: str | None = None
     speed: str = "quality"  # "quality" (LLM) | "fast" (no LLM, parsed template — output_only only)
+
+
+class LatencyRequest(BaseModel):
+    info: dict  # the same `info` dict returned by /api/analyze
+    framework: str | None = None  # optional override; auto-defaulted per device if omitted
+    debug: bool = False  # include internal _debug diagnostics (roofline vs raw ML values) in the response
+
+
+@app.post("/api/predict-latency")
+def predict_latency(req: LatencyRequest):
+    """Detects whether the analyzed repo/model is an LLM or a vision model,
+    resolves this machine's hardware against the researched spec lookup
+    table, and returns a latency prediction from the matching trained model.
+
+    Currently supports: llm, vision. Anything else returns a 200 with
+    model_class="unknown" and a reason, rather than a hard error — the
+    frontend can render "not supported yet" instead of breaking. Extend by
+    adding a new branch here + a new predict_<category>() in ml/predict.py.
+    """
+    info = req.info or {}
+    model_class, confidence, reason = detect_model_class(info)
+
+    if model_class == "unknown":
+        return {
+            "model_class": "unknown",
+            "confidence": confidence,
+            "reason": reason,
+            "message": "This repo doesn't match a model class we can currently predict "
+                       "latency for (supported so far: LLM, vision). Support for more "
+                       "categories is planned.",
+        }
+
+    hardware_row, hardware_note = resolve_hardware(_SYSTEM_SPECS)
+    if hardware_row is None:
+        raise HTTPException(
+            status_code=422,
+            detail="Could not resolve this machine's hardware against the spec lookup "
+                   "table (no GPU detected and no CPU archetype matched). Try running "
+                   "system analysis again.",
+        )
+
+    available_ram_gb = (_SYSTEM_SPECS.get("memory") or {}).get("available_ram_gb")
+
+    if model_class == "llm":
+        attrs = extract_llm_attributes(info)
+        result = predict_llm(attrs, hardware_row, framework=req.framework or "ollama", available_ram_gb=available_ram_gb)
+    else:  # vision
+        attrs = extract_vision_attributes(info)
+        result = predict_vision(attrs, hardware_row, framework=req.framework, available_ram_gb=available_ram_gb)
+
+    if not req.debug:
+        result.pop("_debug", None)
+
+    result["detection"] = {"confidence": confidence, "reason": reason}
+    result["hardware_used"] = {
+        "device_name": hardware_row["device_name"],
+        "device_type": hardware_row["device_type"],
+        "match_note": hardware_note,
+        "spec_confidence": hardware_row.get("spec_confidence"),
+    }
+    result["attribute_notes"] = [
+        k for k, v in attrs.items() if k.startswith("_had_") and not v
+    ]
+    return result
 
 
 def detect_source(url: str) -> str:

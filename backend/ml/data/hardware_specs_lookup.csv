@@ -1,0 +1,127 @@
+device_name,vendor,category,device_type,memory_gb,memory_type,memory_bandwidth_gbs,compute_fp16_tflops,compute_fp32_tflops,tdp_watts,release_year,spec_confidence,notes
+GTX 1050 Ti,NVIDIA,consumer,gpu,4,GDDR5,112,2.1,2.1,75,2016,vendor_spec,
+GTX 1060 6GB,NVIDIA,consumer,gpu,6,GDDR5,192,4.4,4.4,120,2016,vendor_spec,
+GTX 1070,NVIDIA,consumer,gpu,8,GDDR5,256,6.5,6.5,150,2016,vendor_spec,
+GTX 1080,NVIDIA,consumer,gpu,8,GDDR5X,320,8.9,8.9,180,2016,vendor_spec,
+GTX 1080 Ti,NVIDIA,consumer,gpu,11,GDDR5X,484,11.3,11.3,250,2017,vendor_spec,
+GTX 1650,NVIDIA,consumer,gpu,4,GDDR5,128,2.9,2.9,75,2019,vendor_spec,
+GTX 1660,NVIDIA,consumer,gpu,6,GDDR5,192,4.2,4.2,120,2019,vendor_spec,
+GTX 1660 Ti,NVIDIA,consumer,gpu,6,GDDR6,288,5.4,5.4,120,2019,vendor_spec,
+RTX 2060,NVIDIA,consumer,gpu,6,GDDR6,336,12.6,6.3,160,2019,vendor_spec,
+RTX 2060 Super,NVIDIA,consumer,gpu,8,GDDR6,448,14.4,7.2,175,2019,vendor_spec,
+RTX 2070,NVIDIA,consumer,gpu,8,GDDR6,448,14.9,7.5,175,2018,vendor_spec,
+RTX 2070 Super,NVIDIA,consumer,gpu,8,GDDR6,448,18.1,9.1,215,2019,vendor_spec,
+RTX 2080,NVIDIA,consumer,gpu,8,GDDR6,448,20.1,10.1,215,2018,vendor_spec,
+RTX 2080 Super,NVIDIA,consumer,gpu,8,GDDR6,496,22.3,11.2,250,2019,vendor_spec,
+RTX 2080 Ti,NVIDIA,consumer,gpu,11,GDDR6,616,28.5,14.2,250,2018,vendor_spec,
+RTX 3050,NVIDIA,consumer,gpu,8,GDDR6,224,9.1,9.1,130,2022,vendor_spec,
+RTX 3060 12GB,NVIDIA,consumer,gpu,12,GDDR6,360,12.7,12.7,170,2021,vendor_spec,
+RTX 3060 Ti,NVIDIA,consumer,gpu,8,GDDR6,448,16.2,16.2,200,2020,vendor_spec,
+RTX 3070,NVIDIA,consumer,gpu,8,GDDR6,448,20.3,20.3,220,2020,vendor_spec,
+RTX 3070 Ti,NVIDIA,consumer,gpu,8,GDDR6X,608,21.7,21.7,290,2021,vendor_spec,
+RTX 3080,NVIDIA,consumer,gpu,10,GDDR6X,760,29.8,29.8,320,2020,vendor_spec,
+RTX 3080 Ti,NVIDIA,consumer,gpu,12,GDDR6X,912,34.1,34.1,350,2021,vendor_spec,
+RTX 3090,NVIDIA,consumer,gpu,24,GDDR6X,936,35.6,35.6,350,2020,vendor_spec,
+RTX 3090 Ti,NVIDIA,consumer,gpu,24,GDDR6X,1008,40.0,40.0,450,2022,vendor_spec,
+RTX 4060,NVIDIA,consumer,gpu,8,GDDR6,272,15.1,15.1,115,2023,vendor_spec,
+RTX 4060 Ti 8GB,NVIDIA,consumer,gpu,8,GDDR6,288,22.1,22.1,160,2023,vendor_spec,
+RTX 4060 Ti 16GB,NVIDIA,consumer,gpu,16,GDDR6,288,22.1,22.1,165,2023,vendor_spec,
+RTX 4070,NVIDIA,consumer,gpu,12,GDDR6X,504,29.1,29.1,200,2023,vendor_spec,
+RTX 4070 Super,NVIDIA,consumer,gpu,12,GDDR6X,504,35.5,35.5,220,2024,vendor_spec,
+RTX 4070 Ti,NVIDIA,consumer,gpu,12,GDDR6X,504,40.1,40.1,285,2023,vendor_spec,
+RTX 4070 Ti Super,NVIDIA,consumer,gpu,16,GDDR6X,672,44.1,44.1,285,2024,vendor_spec,
+RTX 4080,NVIDIA,consumer,gpu,16,GDDR6X,717,48.7,48.7,320,2022,vendor_spec,
+RTX 4080 Super,NVIDIA,consumer,gpu,16,GDDR6X,736,52.2,52.2,320,2024,vendor_spec,
+RTX 4090,NVIDIA,consumer,gpu,24,GDDR6X,1008,82.6,82.6,450,2022,vendor_spec,
+RTX 5070,NVIDIA,consumer,gpu,12,GDDR7,672,61.8,30.9,250,2025,vendor_spec,
+RTX 5070 Ti,NVIDIA,consumer,gpu,16,GDDR7,896,87.9,44.0,300,2025,vendor_spec,
+RTX 5080,NVIDIA,consumer,gpu,16,GDDR7,960,90.0,45.0,360,2025,vendor_spec,
+RTX 5090,NVIDIA,consumer,gpu,32,GDDR7,1792,125.0,62.5,575,2025,vendor_spec,
+RTX A4000,NVIDIA,workstation,gpu,16,GDDR6,448,19.2,19.2,140,2021,vendor_spec,
+RTX A5000,NVIDIA,workstation,gpu,24,GDDR6,768,27.8,27.8,230,2021,vendor_spec,
+RTX A6000,NVIDIA,workstation,gpu,48,GDDR6,768,38.7,38.7,300,2020,vendor_spec,
+RTX 6000 Ada,NVIDIA,workstation,gpu,48,GDDR6,960,91.1,91.1,300,2022,vendor_spec,
+Tesla T4,NVIDIA,datacenter,gpu,16,GDDR6,320,65.0,8.1,70,2018,vendor_spec,
+Tesla V100 16GB,NVIDIA,datacenter,gpu,16,HBM2,900,125.0,15.7,300,2017,vendor_spec,
+A100 40GB,NVIDIA,datacenter,gpu,40,HBM2,1555,312.0,19.5,400,2020,vendor_spec,
+A100 80GB SXM,NVIDIA,datacenter,gpu,80,HBM2e,2039,312.0,19.5,400,2021,vendor_spec,
+L4,NVIDIA,datacenter,gpu,24,GDDR6,300,121.0,30.3,72,2023,vendor_spec,
+L40,NVIDIA,datacenter,gpu,48,GDDR6,864,181.0,90.5,300,2022,vendor_spec,
+L40S,NVIDIA,datacenter,gpu,48,GDDR6,864,362.0,91.6,350,2023,vendor_spec,
+H100 PCIe,NVIDIA,datacenter,gpu,80,HBM2e,2000,1513.0,51.0,350,2023,vendor_spec,sparse FP16 tensor w/ FP8 doubling excluded
+H100 SXM,NVIDIA,datacenter,gpu,80,HBM3,3350,1979.0,67.0,700,2023,vendor_spec,
+H200 SXM,NVIDIA,datacenter,gpu,141,HBM3e,4800,1979.0,67.0,700,2024,vendor_spec,
+B200,NVIDIA,datacenter,gpu,192,HBM3e,8000,4500.0,90.0,1000,2025,vendor_spec,
+RX 5700 XT,AMD,consumer,gpu,8,GDDR6,448,9.75,9.75,225,2019,vendor_spec,
+RX 6600,AMD,consumer,gpu,8,GDDR6,224,8.9,8.9,132,2021,vendor_spec,
+RX 6600 XT,AMD,consumer,gpu,8,GDDR6,256,10.6,10.6,160,2021,vendor_spec,
+RX 6700 XT,AMD,consumer,gpu,12,GDDR6,384,13.2,13.2,230,2021,vendor_spec,
+RX 6750 XT,AMD,consumer,gpu,12,GDDR6,432,13.7,13.7,250,2022,vendor_spec,
+RX 6800,AMD,consumer,gpu,16,GDDR6,512,16.2,16.2,250,2020,vendor_spec,
+RX 6800 XT,AMD,consumer,gpu,16,GDDR6,512,20.7,20.7,300,2020,vendor_spec,
+RX 6900 XT,AMD,consumer,gpu,16,GDDR6,512,23.0,23.0,300,2020,vendor_spec,
+RX 6950 XT,AMD,consumer,gpu,16,GDDR6,576,23.7,23.7,335,2022,vendor_spec,
+RX 7600,AMD,consumer,gpu,8,GDDR6,288,21.5,21.5,165,2023,vendor_spec,
+RX 7700 XT,AMD,consumer,gpu,12,GDDR6,432,35.2,35.2,245,2023,vendor_spec,
+RX 7800 XT,AMD,consumer,gpu,16,GDDR6,624,37.3,37.3,263,2023,vendor_spec,
+RX 7900 GRE,AMD,consumer,gpu,16,GDDR6,576,46.0,46.0,260,2023,vendor_spec,
+RX 7900 XT,AMD,consumer,gpu,20,GDDR6,800,51.6,51.6,315,2022,vendor_spec,
+RX 7900 XTX,AMD,consumer,gpu,24,GDDR6,960,61.4,61.4,355,2022,vendor_spec,
+RX 9060 XT 16GB,AMD,consumer,gpu,16,GDDR6,322,51.0,25.5,150,2025,vendor_spec,
+RX 9070 XT,AMD,consumer,gpu,16,GDDR6,650,97.3,48.7,304,2025,vendor_spec,
+MI100,AMD,datacenter,gpu,32,HBM2,1229,184.6,23.1,300,2020,vendor_spec,
+MI210,AMD,datacenter,gpu,64,HBM2e,1638,181.0,45.3,300,2021,vendor_spec,
+MI250,AMD,datacenter,gpu,128,HBM2e,3277,362.1,90.5,560,2021,vendor_spec,
+MI300X,AMD,datacenter,gpu,192,HBM3,5300,1307.4,163.4,750,2023,vendor_spec,
+Arc A380,Intel,consumer,gpu,6,GDDR6,186,7.2,3.6,75,2022,vendor_spec,
+Arc A580,Intel,consumer,gpu,8,GDDR6,256,12.5,6.2,175,2023,vendor_spec,
+Arc A750,Intel,consumer,gpu,8,GDDR6,512,17.2,8.6,225,2022,vendor_spec,
+Arc A770 16GB,Intel,consumer,gpu,16,GDDR6,560,19.7,9.8,225,2022,vendor_spec,
+Arc B580,Intel,consumer,gpu,12,GDDR6,456,27.1,13.6,190,2024,vendor_spec,
+M1,Apple,consumer,apple,8,LPDDR4X unified,68.25,2.6,2.6,20,2020,vendor_spec,
+M1 Pro,Apple,consumer,apple,16,LPDDR5 unified,200,5.2,5.2,30,2021,vendor_spec,
+M1 Max,Apple,consumer,apple,32,LPDDR5 unified,400,10.4,10.4,40,2021,vendor_spec,
+M1 Ultra,Apple,consumer,apple,64,LPDDR5 unified,800,21.0,21.0,60,2022,vendor_spec,
+M2,Apple,consumer,apple,8,LPDDR5 unified,100,3.6,3.6,20,2022,vendor_spec,
+M2 Pro,Apple,consumer,apple,16,LPDDR5 unified,200,6.8,6.8,30,2023,vendor_spec,
+M2 Max,Apple,consumer,apple,32,LPDDR5 unified,400,13.6,13.6,40,2023,vendor_spec,
+M2 Ultra,Apple,consumer,apple,64,LPDDR5 unified,800,27.2,27.2,60,2023,vendor_spec,
+M3,Apple,consumer,apple,8,LPDDR5 unified,100,4.1,4.1,22,2023,vendor_spec,
+M3 Pro,Apple,consumer,apple,18,LPDDR5 unified,150,7.0,7.0,30,2023,vendor_spec,
+M3 Max,Apple,consumer,apple,36,LPDDR5 unified,400,14.2,14.2,40,2023,vendor_spec,
+M3 Ultra,Apple,consumer,apple,96,LPDDR5 unified,819,28.4,28.4,60,2025,vendor_spec,
+M4,Apple,consumer,apple,16,LPDDR5X unified,120,4.6,4.6,22,2024,vendor_spec,
+M4 Pro,Apple,consumer,apple,24,LPDDR5X unified,273,9.2,9.2,30,2024,vendor_spec,
+M4 Max,Apple,consumer,apple,48,LPDDR5X unified,546,18.4,18.4,40,2024,vendor_spec,
+Intel Core i5-10400 (DDR4),Intel,cpu,cpu,,DDR4-2666,42.7,0.413,0.413,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core i7-10700K (DDR4),Intel,cpu,cpu,,DDR4-2933,46.9,0.653,0.653,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core i9-10900K (DDR4),Intel,cpu,cpu,,DDR4-2933,46.9,0.848,0.848,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 5 3600 (DDR4),AMD,cpu,cpu,,DDR4-3200,51.2,0.403,0.403,,2019,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 7 3700X (DDR4),AMD,cpu,cpu,,DDR4-3200,51.2,0.563,0.563,,2019,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 9 3900X (DDR4),AMD,cpu,cpu,,DDR4-3200,51.2,0.883,0.883,,2019,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 5 5600X (DDR4),AMD,cpu,cpu,,DDR4-3200,51.2,0.442,0.442,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 7 5800X (DDR4),AMD,cpu,cpu,,DDR4-3200,51.2,0.602,0.602,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 9 5900X (DDR4),AMD,cpu,cpu,,DDR4-3200,51.2,0.922,0.922,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 9 5950X (DDR4),AMD,cpu,cpu,,DDR4-3200,51.2,1.254,1.254,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core i5-12600K (DDR5),Intel,cpu,cpu,,DDR5-4800,76.8,0.784,0.784,,2021,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core i7-12700K (DDR5),Intel,cpu,cpu,,DDR5-4800,76.8,0.96,0.96,,2021,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core i9-12900K (DDR5),Intel,cpu,cpu,,DDR5-4800,76.8,1.331,1.331,,2021,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core i9-13900K (DDR5),Intel,cpu,cpu,,DDR5-5600,89.6,2.227,2.227,,2022,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core i9-14900K (DDR5),Intel,cpu,cpu,,DDR5-5600,89.6,2.304,2.304,,2023,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 7 7700X (DDR5),AMD,cpu,cpu,,DDR5-5200,83.2,0.691,0.691,,2022,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 9 7900X (DDR5),AMD,cpu,cpu,,DDR5-5200,83.2,1.075,1.075,,2022,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 9 7950X (DDR5),AMD,cpu,cpu,,DDR5-5200,83.2,2.918,2.918,,2022,derived_formula,"ISA=AVX-512, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 9 9950X (DDR5),AMD,cpu,cpu,,DDR5-5600,89.6,2.918,2.918,,2024,derived_formula,"ISA=AVX-512, 2-channel, FLOPS derived not vendor-published"
+AMD Ryzen 5 7600 (DDR5),AMD,cpu,cpu,,DDR5-5200,83.2,0.49,0.49,,2022,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+Intel Core Ultra 9 285K (DDR5),Intel,cpu,cpu,,DDR5-6400,102.4,2.189,2.189,,2024,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+"Intel Xeon Gold 6338 (server, 8ch)",Intel,cpu,cpu,,DDR4-3200,204.8,3.277,3.277,,2021,derived_formula,"ISA=AVX-512, 8-channel, FLOPS derived not vendor-published"
+"AMD EPYC 7763 (server, 8ch)",AMD,cpu,cpu,,DDR4-3200,204.8,3.584,3.584,,2021,derived_formula,"ISA=AVX2, 8-channel, FLOPS derived not vendor-published"
+"AMD EPYC 9654 (server, 12ch)",AMD,cpu,cpu,,DDR5-4800,460.8,11.366,11.366,,2022,derived_formula,"ISA=AVX-512, 12-channel, FLOPS derived not vendor-published"
+"Intel Core i5-1135G7 (laptop, DDR4)",Intel,cpu,cpu,,DDR4-3200,51.2,0.269,0.269,,2020,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+"Intel Core i7-1260P (laptop, DDR5)",Intel,cpu,cpu,,DDR5-4800,76.8,0.902,0.902,,2022,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+"AMD Ryzen 7 7840HS (laptop, DDR5)",AMD,cpu,cpu,,DDR5-5600,89.6,0.653,0.653,,2023,derived_formula,"ISA=AVX2, 2-channel, FLOPS derived not vendor-published"
+"Generic 4-core laptop (DDR4, no AVX2)",AMD,cpu,cpu,,DDR4-2400,38.4,0.083,0.083,,2018,derived_formula,"ISA=SSE, 2-channel, FLOPS derived not vendor-published"
+Apple M-series CPU-only fallback (any gen),Apple,cpu,cpu,,LPDDR unified (CPU-only path),68,1.2,1.2,,2023,estimated,"Used when GPU/ANE offload is unavailable; NEON-only throughput, conservative estimate"
+"Intel Core i5-12500H (laptop, DDR5)",Intel,cpu,cpu,,DDR5-4800,76.8,0.87,0.87,,2022,derived_formula,"ISA=AVX2, 2-channel, 12 cores (4P+8E). Added from lab benchmark (LAPTOP-S5E2D231), FLOPS interpolated from comparable i7-1260P/i9-12900K generation, not vendor-published"
+"Intel Core i7-12700H (laptop, DDR5)",Intel,cpu,cpu,,DDR5-4800,76.8,1.05,1.05,,2022,derived_formula,"ISA=AVX2, 2-channel, 14 cores (6P+8E). Added from lab benchmark (DESKTOP-OHTB214, actually a laptop chassis), FLOPS interpolated from comparable generation, not vendor-published"
+"RTX 4060 (Laptop)",NVIDIA,consumer,gpu,8,GDDR6,232,11.6,5.8,80,2023,estimated,"Mobile variant of desktop RTX 4060; lower clocks/TDP (OEM TGP varies 35-140W). Windows/nvidia-smi often under-reports dedicated VRAM (observed 4GB instead of spec 8GB) -- adapter_ram_gb here uses the vendor spec, not the driver-reported figure, since the driver figure reflects a reporting quirk not true capacity"

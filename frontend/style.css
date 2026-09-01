@@ -259,6 +259,12 @@ h1 {
   word-break: break-word;
 }
 .info-cell-value.mono { font-family: var(--mono); font-size: 13px; }
+.info-cell-desc {
+  font-size: 12px;
+  line-height: 1.45;
+  color: var(--ink-soft);
+  margin-top: 5px;
+}
 .tag-list { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag {
   font-family: var(--mono);
